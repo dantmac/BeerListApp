@@ -30,11 +30,7 @@ class BeerlistDetailsViewController: UIViewController, BeerlistDetailsDisplayLog
         interactor.presenter      = presenter
         presenter.viewController  = viewController
     }
-    
-    // MARK: Routing
-    
-    
-    
+  
     // MARK: View lifecycle
     
     convenience init(beerCellViewModel: BeerCellViewModel) {
@@ -45,8 +41,10 @@ class BeerlistDetailsViewController: UIViewController, BeerlistDetailsDisplayLog
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
         self.view = detailView
+      
+        setup()
+        
         interactor?.makeRequest(request: .getBeerDetails(beerDetails: beerCellViewModel!))
     }
     

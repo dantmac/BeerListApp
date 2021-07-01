@@ -50,19 +50,13 @@ class BeerlistViewController: UIViewController, BeerlistDisplayLogic {
         router.viewController     = viewController
     }
     
-    // MARK: Routing
-    
-    
-    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setup()
-        setupBackgroundImage()
-        setTableView()
-        setupTopBars()
+        setupViews()
+       
         interactor?.makeRequest(request: .getBeerlist)
     }
     
@@ -90,7 +84,14 @@ class BeerlistViewController: UIViewController, BeerlistDisplayLogic {
         }
     }
     
-    private func setTableView() {
+    private func setupViews() {
+        setup()
+        setupBackgroundImage()
+        setupTableView()
+        setupTopBars()
+    }
+    
+    private func setupTableView() {
         super.view.addSubview(tableView)
         
         tableView.fillSuperview()
