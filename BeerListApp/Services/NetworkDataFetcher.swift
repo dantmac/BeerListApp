@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol DataFetcher {
-    func getData(response: @escaping ([BeerItem]?) -> Void)
+protocol BeerlistDataFetcher {
+    func getBeerlist(response: @escaping ([BeerItem]?) -> Void)
     func getNextBatch(response: @escaping ([BeerItem]?) -> Void)
 }
 
-struct NetworkDataFetcher: DataFetcher {
+struct NetworkDataFetcher: BeerlistDataFetcher {
     
     static var currentUrlPage = 1
     let networking: Networking
@@ -21,7 +21,7 @@ struct NetworkDataFetcher: DataFetcher {
         self.networking = networking
     }
     
-    func getData(response: @escaping ([BeerItem]?) -> Void) {
+    func getBeerlist(response: @escaping ([BeerItem]?) -> Void) {
         let params = Params.params
         networking.request(path: API.beerlist, params: params) { data, error in
             if let error = error {

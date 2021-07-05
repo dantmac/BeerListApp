@@ -9,27 +9,23 @@
 import UIKit
 
 enum Beerlist {
-   
-  enum Model {
-    struct Request {
-      enum RequestType {
-        case getBeerlist
-        case getNextBatch
-      }
+    
+    enum Model {
+        enum RequestType {
+            case getBeerlist
+            case getNextBatch
+        }
+        
+        enum ResponseType {
+            case presentBeerlist(beer: [BeerItem])
+            case presentFooterLoader
+        }
+        
+        enum ViewModelData {
+            case displayBeerlist(beerViewModel: BeerViewModel)
+            case displayFooterLoader
+        }
     }
-    struct Response {
-      enum ResponseType {
-        case presentBeerlist(beer: [BeerItem])
-        case presentFooterLoader
-      }
-    }
-    struct ViewModel {
-      enum ViewModelData {
-        case displayBeerlist(beerViewModel: BeerViewModel)
-        case displayFooterLoader
-      }
-    }
-  }
 }
 
 struct BeerViewModel {

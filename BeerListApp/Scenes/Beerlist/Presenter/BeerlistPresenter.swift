@@ -9,13 +9,13 @@
 import UIKit
 
 protocol BeerlistPresentationLogic {
-    func presentData(response: Beerlist.Model.Response.ResponseType)
+    func presentData(response: Beerlist.Model.ResponseType)
 }
 
 class BeerlistPresenter: BeerlistPresentationLogic {
     weak var viewController: BeerlistDisplayLogic?
     
-    func presentData(response: Beerlist.Model.Response.ResponseType) {
+    func presentData(response: Beerlist.Model.ResponseType) {
         switch response {
         case .presentBeerlist(let beer):
             let cells = beer.map { beerItem in

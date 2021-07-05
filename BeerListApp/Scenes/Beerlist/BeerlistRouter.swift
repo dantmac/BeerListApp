@@ -12,7 +12,7 @@ protocol BeerlistRoutingLogic {
     func navigateToDetails(for cellViewModel: BeerCellViewModel)
 }
 
-class BeerlistRouter: NSObject, BeerlistRoutingLogic {
+class BeerlistRouter: BeerlistRoutingLogic {
     
     weak var viewController: BeerlistViewController?
     

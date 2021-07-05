@@ -9,13 +9,13 @@
 import UIKit
 
 protocol BeerlistDisplayLogic: AnyObject {
-    func displayData(viewModel: Beerlist.Model.ViewModel.ViewModelData)
+    func displayData(viewModel: Beerlist.Model.ViewModelData)
 }
 
 class BeerlistViewController: UIViewController, BeerlistDisplayLogic {
     
     var interactor: BeerlistBusinessLogic?
-    var router: (NSObjectProtocol & BeerlistRoutingLogic)?
+    var router: BeerlistRoutingLogic?
     
     private var beerViewModel = BeerViewModel(cells: [])
     private lazy var footerView = FooterView()
@@ -66,7 +66,7 @@ class BeerlistViewController: UIViewController, BeerlistDisplayLogic {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    func displayData(viewModel: Beerlist.Model.ViewModel.ViewModelData) {
+    func displayData(viewModel: Beerlist.Model.ViewModelData) {
         switch viewModel {
         case .displayBeerlist(let beerViewModel):
             self.beerViewModel = beerViewModel

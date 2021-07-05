@@ -9,27 +9,23 @@
 import UIKit
 
 protocol BeerlistBusinessLogic {
-    func makeRequest(request: Beerlist.Model.Request.RequestType)
+    func makeRequest(request: Beerlist.Model.RequestType)
 }
 
 class BeerlistInteractor: BeerlistBusinessLogic {
     
     var presenter: BeerlistPresentationLogic?
-    var service: BeerlistService?
+    var service: BeerlistServiceProtocol = BeerlistService()
     
-    func makeRequest(request: Beerlist.Model.Request.RequestType) {
-        if service == nil {
-            service = BeerlistService()
-        }
-        
+    func makeRequest(request: Beerlist.Model.RequestType) {
         switch request {
         case .getBeerlist:
-            service?.getData(completion: { [weak self] beerItems in
+            service.getBeerlist(completion: { [weak self] beerItems in
                 self?.presenter?.presentData(response: .presentBeerlist(beer: beerItems))
             })
         case .getNextBatch:
             self.presenter?.presentData(response: .presentFooterLoader)
-            service?.getNextBatch(completion: { beers in
+            service.getNextBatch(completion: { beers in
                 self.presenter?.presentData(response: .presentBeerlist(beer: beers))
             })
         }

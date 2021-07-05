@@ -8,19 +8,23 @@
 
 import UIKit
 
-class BeerlistService {
+protocol BeerlistServiceProtocol {
+    func getBeerlist(completion: @escaping ([BeerItem]) -> Void)
+    func getNextBatch(completion: @escaping ([BeerItem]) -> Void)
+}
+
+class BeerlistService: BeerlistServiceProtocol {
     
-    var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService())
+    var fetcher: BeerlistDataFetcher = NetworkDataFetcher(networking: NetworkService())
     var footerView = FooterView()
     
     private var beerItems: [BeerItem]?
     
-    func getData(completion: @escaping ([BeerItem]) -> Void) {
-        fetcher.getData { [weak self] beers in
-            if ((self?.beerItems = beers) != nil) {
-                guard let beerItems = self?.beerItems else { return }
-                completion(beerItems)
-            }
+    func getBeerlist(completion: @escaping ([BeerItem]) -> Void) {
+        fetcher.getBeerlist { [weak self] beers in
+            self?.beerItems = beers
+            guard let beerItems = self?.beerItems else { return }
+            completion(beerItems)
         }
     }
     
