@@ -70,6 +70,7 @@ class BeerlistViewController: UIViewController, BeerlistDisplayLogic {
         switch viewModel {
         case .displayBeerlist(let beerViewModel):
             self.beerViewModel = beerViewModel
+            
             footerView.hideLoader()
             tableView.reloadData()
         case .displayFooterLoader:
